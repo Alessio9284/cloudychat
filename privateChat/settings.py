@@ -77,19 +77,12 @@ DATABASES = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'django',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
-        'PORT': '33066',
-        #'OPTIONS': {
-        #    'ssl': {
-        #        'ca':'certificates/cleardb-ca.pem',
-        #        'cert':'certificates/b121cd6450c8fa-cert.pem',
-        #        'key':'certificates/b121cd6450c8fa-key.pem'
-        #    },
-        #},
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
+        'NAME': 'dfesvcdt8moff2',
+        'USER': 'ybjgaakowbxxwv',
+        'PASSWORD': '923fddc4697ae12fc4eb531de5879e9b48635865cd9f80e0b547a7119d644d59',
+        'HOST': 'ec2-54-247-70-127.eu-west-1.compute.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
