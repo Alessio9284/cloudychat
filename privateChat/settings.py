@@ -1,7 +1,9 @@
 import os
 import pymysql
+import django_heroku
 
 pymysql.install_as_MySQLdb()
+django_heroku.settings(locals())
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -82,13 +84,13 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '33066',
-        'OPTIONS': {
-            'ssl': {
-                'ca':'certificates/cleardb-ca.pem',
-                'cert':'certificates/b121cd6450c8fa-cert.pem',
-                'key':'certificates/b121cd6450c8fa-key.pem'
-            },
-        },
+        #'OPTIONS': {
+        #    'ssl': {
+        #        'ca':'certificates/cleardb-ca.pem',
+        #        'cert':'certificates/b121cd6450c8fa-cert.pem',
+        #        'key':'certificates/b121cd6450c8fa-key.pem'
+        #    },
+        #},
     }
 }
 
