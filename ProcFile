@@ -1,1 +1,1 @@
-web: gunicorn django-private-chat.wsgi
+web: python3 manage.py runserver
