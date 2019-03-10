@@ -82,6 +82,13 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '33066',
+        'OPTIONS': {
+            'ssl': {
+                'ca':'certificates/cleardb-ca.pem',
+                'cert':'certificates/b121cd6450c8fa-cert.pem',
+                'key':'certificates/b121cd6450c8fa-key.pem'
+            },
+        },
     }
 }
 
