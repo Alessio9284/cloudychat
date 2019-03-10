@@ -5,16 +5,16 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 def index(request):
-    return render(request, 'chat/index.html')
+    return render(request, 'index.html')
    
 def registration(request):
-    return render(request, 'chat/registration.html')
+    return render(request, 'registration.html')
 
 def userlist(request):
-    return render(request, 'chat/userlist.html')
+    return render(request, 'userlist.html')
 
 def chat(request, nickname):
     #controllare che l'utente inserito esista nella tabella users
     #creare una tabella con gli id dei due utenti
     #pensare al meccanismo di salvataggio
-    return render(request, 'chat/private_chat.html', { 'nickname' : nickname })
+    return render(request, 'private_chat.html', { 'nickname' : nickname })
