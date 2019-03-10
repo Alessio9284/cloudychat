@@ -1,1 +1,1 @@
-web: gunicorn django-private-chat.wsgi:application --log-file -
+web: gunicorn privateChat.wsgi:application --log-file -
