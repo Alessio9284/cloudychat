@@ -37,7 +37,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created = True, primary_key = True, serialize = False)),
                 ('nickname', models.CharField(max_length = 255)),
-                ('data_pub', models.DateTimeField()),
+                ('password', models.CharField(max_length = 32)),
+                ('color', models.CharField(max_length = 255)),
             ],
         ),
     ]

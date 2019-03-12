@@ -4,6 +4,7 @@ import datetime
 
 class User(models.Model):
     nickname = models.CharField(max_length = 255)
+    password = models.CharField(max_length = 32)
     color = models.CharField(max_length = 255)
 
 '''class Domanda(models.Model):

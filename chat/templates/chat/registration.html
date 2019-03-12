@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="it-IT">
 	<head>
-		<title>Sign-In</title>
+		<title>Sign Up</title>
 		
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,10 +16,12 @@
 	<body>
 		<div class="contenitore">
 			<div class="log_reg">
-				<form>
+				<form method="post" action="/add/">
 					<span class="titolo">
 						Registration
 					</span>
+
+					{% csrf_token %}
 
 					<div class="inputs">
 						<input class="input" type="text" name="nickname">
