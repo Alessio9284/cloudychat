@@ -13,7 +13,6 @@ body, html
 	font-family: Montserrat, sans-serif;
 	background-image: url("../img/sfondo.png");
 	background-size: cover;
-	background-repeat: no-repeat;
 }
 
 a:focus
@@ -49,7 +48,7 @@ button:hover
 	cursor: pointer;
 }
 
-#contenitore
+.contenitore
 {
 	width: 100%;
 	min-height: 100%;
@@ -65,7 +64,7 @@ button:hover
 	background: rgba(255, 255, 255, 0.2);
 }
 
-#login
+.log_reg
 {
 	width: 390px;
 	background: #fff;
@@ -80,11 +79,11 @@ button:hover
 	-ms-box-shadow: 0 5px 50px 0px rgba(0, 0, 0, 0.5);
 }
 
-#titolo
+.titolo
 {
 	display: block;
 	font-size: 40px;
-	color: #333;
+	color: dodgerblue;
 	line-height: 1.2;
 	text-align: center;
 	padding-bottom: 50px;
@@ -139,10 +138,10 @@ button:hover
 	transition: all 0.4s;
 
 	background: #6a7dfe;
-	background: -webkit-linear-gradient(left, #21d4fd, #b721ff);
-	background: -o-linear-gradient(left, #21d4fd, #b721ff);
-	background: -moz-linear-gradient(left, #21d4fd, #b721ff);
-	background: linear-gradient(left, #21d4fd, #b721ff);
+	background: -webkit-linear-gradient(left, #21d4fd, #0E22FD);
+	background: -o-linear-gradient(left, #21d4fd, #0E22FD);
+	background: -moz-linear-gradient(left, #21d4fd, #0E22FD);
+	background: linear-gradient(left, #21d4fd, #0E22FD);
 }
 
 .placeholder::after
@@ -175,7 +174,7 @@ button:hover
 	width: 100%;
 }
 
-#base
+.base
 {
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -187,7 +186,7 @@ button:hover
 	padding-top: 13px;
 }
 
-#posizione
+.posizione
 {
 	width: 100%;
 	display: block;
@@ -198,17 +197,17 @@ button:hover
 	margin: 0 auto;
 }
 
-#animazione
+.animazione
 {
 	position: absolute;
 	z-index: -1;
 	width: 300%;
 	height: 100%;
 	background: #a64bf4;
-	background: -webkit-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff);
-	background: -o-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff);
-	background: -moz-linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff);
-	background: linear-gradient(right, #21d4fd, #b721ff, #21d4fd, #b721ff);
+	background: -webkit-linear-gradient(right, #21d4fd, #0E22FD, #21d4fd, #0E22FD);
+	background: -o-linear-gradient(right, #21d4fd, #0E22FD, #21d4fd, #0E22FD);
+	background: -moz-linear-gradient(right, #21d4fd, #0E22FD, #21d4fd, #0E22FD);
+	background: linear-gradient(right, #21d4fd, #0E22FD, #21d4fd, #0E22FD);
 	top: 0;
 	left: -100%;
 
@@ -218,7 +217,7 @@ button:hover
 	transition: all 0.4s;
 }
 
-#btnlogin
+.btn
 {
 	font-size: 15px;
 	color: #fff;
@@ -238,14 +237,19 @@ button:hover
 	height: 50px;
 }
 
-#posizione:hover #animazione
+.posizione:hover .animazione
 {
 	left: 0;
 }
 
-#registrazione
+.link
 {
 	padding-top: 50px;
 	text-align: center;
 	font-size: 13px;
+}
+
+.testo
+{
+	color: #666;
 }

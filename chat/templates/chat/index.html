@@ -2,18 +2,22 @@
 <!DOCTYPE html>
 <html lang="it-IT">
 	<head>
-		<meta charset="utf-8">
 		<title>Login</title>
+
+		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
-		<!--<link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">-->
+		<link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
 		<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+		<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 	</head>
 	<body>
-		<div id="contenitore">
-			<div id="login">
+		<div class="contenitore">
+			<div class="log_reg">
 				<form>
-					<span id="titolo">
+					<span class="titolo">
 						Welcome
 					</span>
 
@@ -27,21 +31,21 @@
 						<span class="placeholder" data-placeholder="Password"></span>
 					</div>
 
-					<div id="base">
-						<div id="posizione">
-							<div id="animazione"></div>
-							<button id="btnlogin">
-								Login
+					<div class="base">
+						<div class="posizione">
+							<div class="animazione"></div>
+							<button class="btn">
+								Sign In
 							</button>
 						</div>
 					</div>
 
-					<div id="registrazione">
-						<span style="color: #666;">
+					<div class="link">
+						<span class="testo">
 							Don’t have an account?
 						</span>
 
-						<a href="#">
+						<a href="reg">
 							Sign Up
 						</a>
 					</div>

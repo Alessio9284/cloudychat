@@ -2,13 +2,16 @@ import os
 import pymysql
 import django_heroku
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
 pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Directory privateChat
 ROOT_PATH = os.path.dirname(__file__)
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -16,11 +19,7 @@ ROOT_PATH = os.path.dirname(__file__)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '3%6-$%u@&df@949i^nhe3ubp687&txqa$g8z=p^9fa)4mw22zz'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
