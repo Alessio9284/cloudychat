@@ -1,17 +1,52 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="it-IT">
 	<head>
-		<title>Login</title>
 		<meta charset="utf-8">
-		<!--<link rel="stylesheet" type="text/css" href="css/index.css">
-		<script type="text/javascript" src="js/"></script>
-		<script type="text/javascript" src="js/index.js"></script>-->
+		<title>Login</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<!--<link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">-->
+		<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 	</head>
 	<body>
-		<h1>Login</h1>
-		<div>
-			<p>link alla registrazione</p>
-			<p>redirect userlist</p>
+		<div id="contenitore">
+			<div id="login">
+				<form>
+					<span id="titolo">
+						Welcome
+					</span>
+
+					<div class="inputs">
+						<input class="input" type="text" name="nickname">
+						<span class="placeholder" data-placeholder="Nickname"></span>
+					</div>
+
+					<div class="inputs">
+						<input class="input" type="password" name="password">
+						<span class="placeholder" data-placeholder="Password"></span>
+					</div>
+
+					<div id="base">
+						<div id="posizione">
+							<div id="animazione"></div>
+							<button id="btnlogin">
+								Login
+							</button>
+						</div>
+					</div>
+
+					<div id="registrazione">
+						<span style="color: #666;">
+							Don’t have an account?
+						</span>
+
+						<a href="#">
+							Sign Up
+						</a>
+					</div>
+				</form>
+			</div>
 		</div>
 	</body>
 </html>

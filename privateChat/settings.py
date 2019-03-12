@@ -7,6 +7,8 @@ pymysql.install_as_MySQLdb()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+ROOT_PATH = os.path.dirname(__file__)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -86,13 +88,13 @@ DATABASES = {
 		'PASSWORD': '8296016b',
 		'HOST': 'eu-cdbr-west-02.cleardb.net',
 		'PORT': '',
-		'OPTIONS': {
-			'ssl': {
-				'ca': 'certificates/cleardb-ca.pem',
-				'cert': 'certificates/bf199d2688f63a-cert.pem',
-				'key': 'certificates/bf199d2688f63a-key.pem'
-			}
-		}
+		#'OPTIONS': {
+		#	'ssl': {
+		#		'ca': 'certificates/cleardb-ca.pem',
+		#		'cert': 'certificates/bf199d2688f63a-cert.pem',
+		#		'key': 'certificates/bf199d2688f63a-key.pem'
+		#	}
+		#}
 	}
 }
 
@@ -134,5 +136,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [os.path.join(ROOT_PATH, 'static')]
 
 django_heroku.settings(locals())
