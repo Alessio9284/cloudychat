@@ -16,12 +16,10 @@
 	<body>
 		<div class="contenitore">
 			<div class="log_reg">
-				<form method="post" action="">
+				<form method="post" action="/log/">
 					<span class="titolo">
 						Welcome
 					</span>
-
-					{% csrf_token %}
 
 					<div class="inputs">
 						<input class="input" type="text" name="nickname">
@@ -33,10 +31,12 @@
 						<span class="placeholder" data-placeholder="Password"></span>
 					</div>
 
+					{% csrf_token %}
+
 					<div class="base">
 						<div class="posizione">
 							<div class="animazione"></div>
-							<button class="btn">
+							<button class="btn" type="submit">
 								Sign In
 							</button>
 						</div>

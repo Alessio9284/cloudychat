@@ -21,8 +21,6 @@
 						Registration
 					</span>
 
-					{% csrf_token %}
-
 					<div class="inputs">
 						<input class="input" type="text" name="nickname">
 						<span class="placeholder" data-placeholder="Nickname"></span>
@@ -38,10 +36,12 @@
 						<span class="placeholder" data-placeholder="Confirm Password"></span>
 					</div>
 
+					{% csrf_token %}
+
 					<div class="base">
 						<div class="posizione">
 							<div class="animazione"></div>
-							<button class="btn">
+							<button class="btn" type="submit">
 								Sign Up
 							</button>
 						</div>

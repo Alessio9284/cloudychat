@@ -26,6 +26,7 @@ def chat(request, nickname):
 
 
 def adduser(request):
+
 	if request.method == 'POST':
 
 		form = FormDati(request.POST)
@@ -53,7 +54,7 @@ def adduser(request):
 		return HttpResponseRedirect('/reg/')
 
 def logging(request):
-	#da mettere a posto
+
 	if request.method == 'POST':
 
 		form = FormDati(request.POST)
@@ -61,16 +62,21 @@ def logging(request):
 		if form.is_valid():
 
 			dati = form.cleaned_data
+
 			nickname = dati['nickname']
-			password =  dati['password']
+			password = md5(dati['password'].encode()).hexdigest()
+			color = User.objects.filter(nickname = nickname, password = password).values('color')
 
-			print(nickname)
-			print(password)
+			user = User.objects.filter(nickname = nickname, password = password)
 
-			if (User.objects.filter(nickname = nickname).exists() and User.objects.filter(password = password).exists()):
-				#utente loggato
+			if (user.exists()):
+
+				request.session['nickname'] = nickname
+				request.session['password'] = password
+				request.session['color'] = color
+
 				return HttpResponseRedirect('/list/')
-			else:
-				return HttpResponseRedirect('../')
-	else:
-		return HttpResponseRedirect('../')
+
+			return HttpResponseRedirect('../')
+
+	return HttpResponseRedirect('../')
