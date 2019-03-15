@@ -12,8 +12,8 @@ import random
 def index(request):
 
 	# Distruzione della sessione
-	for key in list(request.session.keys()):
-		del request.session[key]
+	for k in list(request.session.keys()):
+		del request.session[k]
 
 	return render(request, 'chat/index.html')
    
@@ -21,12 +21,19 @@ def registration(request):
 	return render(request, 'chat/registration.html')
 
 def userlist(request):
+
+	if 'nickname' not in request.session or 'password' not in request.session or 'color' not in request.session:
+
+		return HttpResponseRedirect('../')
+
 	return render(request, 'chat/userlist.html')
 
 def chat(request, nickname):
-	#controllare che l'utente inserito esista nella tabella users
-	#creare una tabella con gli id dei due utenti
-	#pensare al meccanismo di salvataggio
+
+	if 'nickname' not in request.session or 'password' not in request.session or 'color' not in request.session:
+
+		return HttpResponseRedirect('../../')
+
 	return render(request, 'chat/private_chat.html', { 'nickname' : nickname })
 
 
