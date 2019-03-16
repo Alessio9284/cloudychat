@@ -31,7 +31,7 @@ $(document).ready(function()
 
 				for(var i = 0; i < json.length; i++)
 				{
-					$("#users").html(
+					$("#users").append(
 						"<tr>" +
 							"<td>" + json[i].fields.nickname + "</td>" +
 							//"<td>" + json[i].fields.password + "</td>" +
