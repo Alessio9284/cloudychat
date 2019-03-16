@@ -23,10 +23,4 @@ class Message(models.Model):
 
     def pubblicata_di_recente(self):
     	now = timezone.now()
-    	return (self.data_pub >= now - datetime.timedelta(days = 30)) and (self.data_pub < now)
-
-
-class Scelta(models.Model):
-    domanda = models.ForeignKey(Domanda, on_delete = models.CASCADE)
-    testo_scelta = models.CharField(max_length = 200)
-    voto = models.IntegerField(default = 0)'''
+    	return (self.data_pub >= now - datetime.timedelta(days = 30)) and (self.data_pub < now)'''

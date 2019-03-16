@@ -1,16 +1,16 @@
-<!DOCTYPE html>
-<html lang="it-IT">
-	<head>
-		<title>Elenco Utenti</title>
-		<meta charset="utf-8">
-		<!--<link rel="stylesheet" type="text/css" href="css/index.css">
-		<script type="text/javascript" src="js/"></script>
-		<script type="text/javascript" src="js/index.js"></script>-->
-	</head>
-	<body>
-		<h1>Elenco Utenti</h1>
-		<div>
-			
-		</div>
-	</body>
-</html>
+{% extends "chat/base.html" %}
+
+{% load static %}
+
+{% block title %}User List{% endblock title %}
+
+{% block style %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/list.css' %}">
+{% endblock style %}
+
+{% block content %}
+	<h1>User List</h1>
+	<div>
+		
+	</div>
+{% endblock content %}

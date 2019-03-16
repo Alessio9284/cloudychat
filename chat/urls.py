@@ -8,8 +8,8 @@ urlpatterns = [
     path('add/', views.adduser, name = 'add'),
     path('list/', views.userlist, name = 'list'),
     path('list/<nickname>/', views.chat, name = 'nickname'),
-    path('update/list/', views.updatelist, name = 'up_list'),
-    path('update/messages/', views.updatemessages, name = 'up_messages'),
+    path('update/', views.updatelist, name = 'update'),
+    path('update/<nickname>/', views.updatemessages, name = 'message'),
 
     #https://stackoverflow.com/questions/13465711/how-do-i-post-with-jquery-ajax-in-django
 

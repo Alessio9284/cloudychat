@@ -1,63 +1,51 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="it-IT">
-	<head>
-		<title>Sign Up</title>
-		
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
-		<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% extends "chat/base.html" %}
 
-		<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-		<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
-	</head>
-	<body>
-		<div class="contenitore">
-			<div class="log_reg">
-				<form method="post" action="/add/">
-					<span class="titolo">
-						Registration
+{% block title %}Sign Up{% endblock title %}
+
+{% block content %}
+	<div class="contenitore">
+		<div class="log_reg">
+			<form method="post" action="/add/">
+				<span class="titolo">
+					Registration
+				</span>
+
+				<div class="inputs">
+					<input class="input" type="text" name="nickname">
+					<span class="placeholder" data-placeholder="Nickname"></span>
+				</div>
+
+				<div class="inputs">
+					<input class="input" type="password" name="password">
+					<span class="placeholder" data-placeholder="Password"></span>
+				</div>
+
+				<div class="inputs">
+					<input class="input" type="password" name="cpassword">
+					<span class="placeholder" data-placeholder="Confirm Password"></span>
+				</div>
+
+				{% csrf_token %}
+
+				<div class="base">
+					<div class="posizione">
+						<div class="animazione"></div>
+						<button class="btn" type="submit">
+							Sign Up
+						</button>
+					</div>
+				</div>
+
+				<div class="link">
+					<span class="testo">
+						Already have an account?
 					</span>
 
-					<div class="inputs">
-						<input class="input" type="text" name="nickname">
-						<span class="placeholder" data-placeholder="Nickname"></span>
-					</div>
-
-					<div class="inputs">
-						<input class="input" type="password" name="password">
-						<span class="placeholder" data-placeholder="Password"></span>
-					</div>
-
-					<div class="inputs">
-						<input class="input" type="password" name="cpassword">
-						<span class="placeholder" data-placeholder="Confirm Password"></span>
-					</div>
-
-					{% csrf_token %}
-
-					<div class="base">
-						<div class="posizione">
-							<div class="animazione"></div>
-							<button class="btn" type="submit">
-								Sign Up
-							</button>
-						</div>
-					</div>
-
-					<div class="link">
-						<span class="testo">
-							Already have an account?
-						</span>
-
-						<a href="../">
-							Sign In
-						</a>
-					</div>
-				</form>
-			</div>
+					<a href="../">
+						Sign In
+					</a>
+				</div>
+			</form>
 		</div>
-	</body>
-</html>
+	</div>
+{% endblock content %}

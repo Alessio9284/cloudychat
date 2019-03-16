@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import User
-from .forms import FormDati
+from .functions import FormDati
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from hashlib import md5
 
@@ -19,17 +19,19 @@ def registration(request):
 
 def userlist(request):
 
-	if 'nickname' not in request.session or 'password' not in request.session or 'color' not in request.session:
+	checkSession(request)
 
-		return HttpResponseRedirect('../')
+	nickname = request.session['nickname']
+	password = request.session['password']
+
+	# Utente attivo
+	User.objects.filter(nickname = nickname, password = password).update(active = True)
 
 	return render(request, 'chat/userlist.html')
 
 def chat(request, nickname):
 
-	if 'nickname' not in request.session or 'password' not in request.session or 'color' not in request.session:
-
-		return HttpResponseRedirect('../../')
+	checkSession(request)
 
 	return render(request, 'chat/private_chat.html', { 'nickname' : nickname })
 
@@ -104,10 +106,20 @@ def logging(request):
 	return HttpResponseRedirect('../')
 
 def updatelist(request):
-	#lista utenti
-	return JsonResponse({})
+
+	userlist = User.objects.filter(active = True)
+
+	return JsonResponse(json.dumps(userlist))
 
 
 def updatemessages(request):
 	#lista messaggi
 	return JsonResponse({})
+
+
+# FUNCTIONS
+
+def checkSession(r):
+	if 'nickname' not in r.session or 'password' not in r.session or 'color' not in r.session:
+
+		return HttpResponseRedirect('../')
