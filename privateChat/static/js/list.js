@@ -29,7 +29,7 @@ $(document).ready(function()
 				var json = JSON.parse(data);
 				//console.log(json);
 
-				$("#users").html();
+				$("#users").html("");
 
 				for(var i = 0; i < json.length; i++)
 				{
