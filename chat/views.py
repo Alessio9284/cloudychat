@@ -1,11 +1,8 @@
 from django.shortcuts import render
 from .models import User
 from .forms import FormDati
-#from django.template import loader
-#from django.shortcuts import get_object_or_404,render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from hashlib import md5
-#from django.urls import reverse
 
 import random
 
@@ -105,3 +102,12 @@ def logging(request):
 			return HttpResponseRedirect('../')
 
 	return HttpResponseRedirect('../')
+
+def updatelist(request):
+	#lista utenti
+	return JsonResponse({})
+
+
+def updatemessages(request):
+	#lista messaggi
+	return JsonResponse({})

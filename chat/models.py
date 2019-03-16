@@ -6,6 +6,13 @@ class User(models.Model):
     nickname = models.CharField(max_length = 255)
     password = models.CharField(max_length = 32)
     color = models.CharField(max_length = 255)
+    active = models.BooleanField(default = False)
+
+class Message(models.Model):
+    text = models.TextField()
+    date = models.DateTimeField(auto_now_add = True)
+    io = models.ForeignKey(User, on_delete = models.CASCADE)
+    tu = models.IntegerField()
 
 '''class Domanda(models.Model):
     testo_domanda = models.CharField(max_length = 200)
