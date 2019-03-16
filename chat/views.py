@@ -11,6 +11,14 @@ import json
 
 def index(request):
 
+	if 'nickname' in request.session and 'password' in request.session and 'color' in request.session:
+		
+		nickname = request.session['nickname']
+		password = request.session['password']
+
+		# Utente inattivo
+		User.objects.filter(nickname = nickname, password = password).update(active = False)
+
 	# Distruzione della sessione
 	for k in list(request.session.keys()):
 		del request.session[k]
