@@ -3,8 +3,11 @@ from .models import User
 from .functions import FormDati
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from hashlib import md5
+from django.core import serializers
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 import random
+import json
 
 def index(request):
 
@@ -105,11 +108,12 @@ def logging(request):
 
 	return HttpResponseRedirect('../')
 
+@ensure_csrf_cookie
 def updatelist(request):
 
-	userlist = User.objects.filter(active = True)
+	userlist = serializers.serialize('json', User.objects.filter(active = True))
 
-	return JsonResponse(json.dumps(userlist))
+	return JsonResponse(userlist, safe = False)
 
 
 def updatemessages(request):

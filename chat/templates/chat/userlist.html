@@ -8,9 +8,14 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/list.css' %}">
 {% endblock style %}
 
+{% block script %}
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+	<script type="text/javascript" src="{% static 'js/list.js' %}"></script>
+{% endblock script %}
+
 {% block content %}
 	<h1>User List</h1>
-	<div>
-		
-	</div>
+	<table id="users">
+
+	</table>
 {% endblock content %}
