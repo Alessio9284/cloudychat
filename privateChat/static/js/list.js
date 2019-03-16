@@ -35,9 +35,9 @@ $(document).ready(function()
 				{
 					$("#users").append(
 						"<tr>" +
-							"<td>" + json[i].fields.nickname + "</td>" +
+							"<td style='color: #" + json[i].fields.color + ";'>" + json[i].fields.nickname + "</td>" +
 							//"<td>" + json[i].fields.password + "</td>" +
-							"<td>" + json[i].fields.color + "</td>" +
+							//"<td>" + json[i].fields.color + "</td>" +
 							//"<td>" + json[i].fields.active + "</td>" +
 						"</tr>"
 					);
