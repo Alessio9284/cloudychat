@@ -51,8 +51,7 @@ $(document).on("click", "#invio", function()
 		},
 		error: function(a, b, error)
 		{
-			swal("Error", "AJAX Error!!!", "error");
-			window.location = "index.php";
+			//alert("AJAX ERROR");
 		}
 	});
 
