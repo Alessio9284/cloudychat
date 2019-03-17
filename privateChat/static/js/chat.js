@@ -76,8 +76,6 @@ $(document).on("click", "#invio", function()
 		success: function(data)
 		{
 			console.log(data);
-			var json = JSON.parse(data);
-			console.log(json);
 		},
 		error: function(a, b, error)
 		{

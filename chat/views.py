@@ -134,7 +134,7 @@ def updatemessages(request, nickname):
 	io = request.session['nickname']
 
 	messages = serializers.serialize('json',
-		Message.objects.filter(Q(io = io) | Q(io = nickname), Q(tu = nickname) | Q(tu = io)))
+		Message.objects.filter(io = io, tu = nickname).filter(io = nickname, tu = io).order_by('id'))
 
 	return JsonResponse(messages, safe = False)
 
@@ -155,6 +155,7 @@ def addmessage(request):
 		# INSERT nel database
 		message.save()
 
+	return JsonResponse({'response' : 1}, safe = False)
 
 # FUNCTIONS
 
