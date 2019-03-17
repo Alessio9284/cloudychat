@@ -67,18 +67,20 @@ WSGI_APPLICATION = 'privateChat.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-'''
+# database://username:password@hostname:port/database_name
+
+
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.sqlite3',
 		'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 	}
 }
+
+
+# mysql://bf199d2688f63a:8296016b@eu-cdbr-west-02.cleardb.net/heroku_e3f89a5afdbe8e0?reconnect=true
+
 '''
-
-#mysql://bf199d2688f63a:8296016b@eu-cdbr-west-02.cleardb.net/heroku_e3f89a5afdbe8e0?reconnect=true
-#mysql://username:password@hostname/database_name?reconnect=true
-
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.mysql', 
@@ -96,6 +98,7 @@ DATABASES = {
 		#}
 	}
 }
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
