@@ -22,40 +22,40 @@ $(document).ready(function()
 	var i = setInterval(lista(), 5000);
 
 	//console.log("inviato");
-});
 
-function lista()
-{
-	$.ajax(
+	function lista()
 	{
-		type: "POST",
-		url: "../update/",
-		success: function(data)
+		$.ajax(
 		{
-			//console.log(data);
-			var json = JSON.parse(data);
-			//console.log(json);
-
-			$("#users").html("");
-
-			for(var i = 0; i < json.length; i++)
+			type: "POST",
+			url: "../update/",
+			success: function(data)
 			{
-				nickname = json[i].fields.nickname;
-				color = json[i].fields.color;
+				//console.log(data);
+				var json = JSON.parse(data);
+				//console.log(json);
 
-				$("#users").append(
-					"<tr>" +
-						"<td><a style='color: #" + color + ";' href='" + nickname + "'>" + nickname + "</td>" +
-						//"<td>" + json[i].fields.password + "</td>" +
-						//"<td>" + json[i].fields.color + "</td>" +
-						//"<td>" + json[i].fields.active + "</td>" +
-					"</tr>"
-				);
-			}
-		},
-		error: function(a, b, error)
-		{
-			//alert("AJAX ERROR");
-		},
-	});
-}
+				$("#users").html("");
+
+				for(var i = 0; i < json.length; i++)
+				{
+					nickname = json[i].fields.nickname;
+					color = json[i].fields.color;
+
+					$("#users").append(
+						"<tr>" +
+							"<td><a style='color: #" + color + ";' href='" + nickname + "'>" + nickname + "</td>" +
+							//"<td>" + json[i].fields.password + "</td>" +
+							//"<td>" + json[i].fields.color + "</td>" +
+							//"<td>" + json[i].fields.active + "</td>" +
+						"</tr>"
+					);
+				}
+			},
+			error: function(a, b, error)
+			{
+				//alert("AJAX ERROR");
+			},
+		});
+	}
+});

@@ -21,6 +21,36 @@ $(document).ready(function()
 
 	var i = setInterval(chat(), 2500);
 
+	function chat()
+	{
+		$.ajax(
+		{
+			type: "POST",
+			url: "../../update/" + nickname + "/",
+			success: function(data)
+			{
+				//console.log(data);
+				var json = JSON.parse(data);
+				//console.log(json);
+
+				$("#scritte").html("");
+
+				for(var i = 0; i < json.length; i++)
+				{
+					$("#scritte").append(
+						"<p>" + json[i].fields.text + "</p>" +
+						"<p style='font-size: 10px;'>" + json[i].fields.date +
+						"<span>&nbspby " + json[i].fields.io + "</span></p>"
+					);
+				}
+			},
+			error: function(a, b, error)
+			{
+				//alert("AJAX ERROR");
+			},
+		});
+	}
+
 	//console.log("inviato");
 });
 
@@ -57,33 +87,3 @@ $(document).on("click", "#invio", function()
 
 	$("#messaggio").val("");
 });
-
-function chat()
-{
-	$.ajax(
-	{
-		type: "POST",
-		url: "../../update/" + nickname + "/",
-		success: function(data)
-		{
-			//console.log(data);
-			var json = JSON.parse(data);
-			//console.log(json);
-
-			$("#scritte").html("");
-
-			for(var i = 0; i < json.length; i++)
-			{
-				$("#scritte").append(
-					"<p>" + json[i].fields.text + "</p>" +
-					"<p style='font-size: 10px;'>" + json[i].fields.date +
-					"<span>&nbspby " + json[i].fields.io + "</span></p>"
-				);
-			}
-		},
-		error: function(a, b, error)
-		{
-			//alert("AJAX ERROR");
-		},
-	});
-}
