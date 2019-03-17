@@ -10,9 +10,9 @@ class User(models.Model):
 
 class Message(models.Model):
     text = models.TextField()
-    date = models.DateTimeField(auto_now_add = True)
-    io = models.ForeignKey(User, on_delete = models.CASCADE)
-    tu = models.IntegerField()
+    date = models.CharField(max_length=255)
+    io = models.CharField(max_length=255)
+    tu = models.CharField(max_length=255)
 
 '''class Domanda(models.Model):
     testo_domanda = models.CharField(max_length = 200)
