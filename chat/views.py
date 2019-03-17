@@ -140,7 +140,7 @@ def updatemessages(request, nickname):
 		messages = serializers.serialize('json', chain(
 			Message.objects.filter(io = io, tu = nickname),
 			Message.objects.filter(io = nickname, tu = io)
-		))
+		).order_by('id'))
 
 	return JsonResponse(messages, safe = False)
 
