@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from hashlib import md5
 from django.core import serializers
 from django.views.decorators.csrf import ensure_csrf_cookie
-from itertools import chain
+from django.db.models import Q
 
 import random
 import json
@@ -136,11 +136,9 @@ def updatemessages(request, nickname):
 	if io == nickname:
 		messages = serializers.serialize('json', Message.objects.filter(io = io, tu = nickname).order_by('id'))
 	else:
-
-		messages = serializers.serialize('json', chain(
-			Message.objects.filter(io = io, tu = nickname),
-			Message.objects.filter(io = nickname, tu = io)
-		).order_by('id'))
+		messages = serializers.serialize('json', 
+			Message.objects.filter(Q(io = io, tu = nickname) | Q(io = nickname, tu = io)).order_by('id')
+		)
 
 	return JsonResponse(messages, safe = False)
 
