@@ -19,7 +19,7 @@ $(document).ready(function()
 
 	lista();
 
-	var i = setInterval(lista(), 5000);
+	var i = setInterval(function(){lista();}, 5000);
 
 	//console.log("inviato");
 
@@ -31,9 +31,9 @@ $(document).ready(function()
 			url: "../update/",
 			success: function(data)
 			{
-				//console.log(data);
+				console.log(data);
 				var json = JSON.parse(data);
-				//console.log(json);
+				console.log(json);
 
 				$("#users").html("");
 

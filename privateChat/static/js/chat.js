@@ -19,7 +19,7 @@ $(document).ready(function()
 
 	chat();
 
-	var i = setInterval(chat(), 2500);
+	var i = setInterval(function(){chat();}, 2500);
 
 	function chat()
 	{
@@ -29,9 +29,9 @@ $(document).ready(function()
 			url: "../../update/" + nickname + "/",
 			success: function(data)
 			{
-				//console.log(data);
+				console.log(data);
 				var json = JSON.parse(data);
-				//console.log(json);
+				console.log(json);
 
 				$("#scritte").html("");
 
@@ -75,9 +75,9 @@ $(document).on("click", "#invio", function()
 		},
 		success: function(data)
 		{
-			//console.log(data);
+			console.log(data);
 			var json = JSON.parse(data);
-			//console.log(json);
+			console.log(json);
 		},
 		error: function(a, b, error)
 		{
