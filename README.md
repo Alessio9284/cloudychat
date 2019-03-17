@@ -1,4 +1,4 @@
-# Progetto SCARSO di Alessio Torricelli
+# Progetto di Alessio Torricelli
 
 ## CHAT PRIVATE
 
