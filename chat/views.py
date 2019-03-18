@@ -44,10 +44,13 @@ def chat(request, nickname):
 
 	checkSession(request)
 
-	io = request.session['nickname']
+	if User.objects.filter(nickname = nickname, active = True).exists():
 
-	return render(request, 'chat/private_chat.html', {'tu' : nickname, 'io' : io})
+		io = request.session['nickname']
 
+		return render(request, 'chat/private_chat.html', {'tu' : nickname, 'io' : io})
+
+	return HttpResponseRedirect('../')
 
 def adduser(request):
 
