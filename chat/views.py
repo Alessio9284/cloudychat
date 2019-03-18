@@ -4,11 +4,7 @@ from .functions import FormDati
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from hashlib import md5
 from django.core import serializers
-from django.views.decorators.csrf import ensure_csrf_cookie
 from django.db.models import Q
-
-# DEBUGGER
-import pdb;
 
 import random
 import json
@@ -122,7 +118,6 @@ def logging(request):
 
 	return HttpResponseRedirect('../')
 
-@ensure_csrf_cookie
 def updatelist(request):
 
 	checkSession(request)

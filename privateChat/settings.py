@@ -69,7 +69,6 @@ WSGI_APPLICATION = 'privateChat.wsgi.application'
 
 # database://username:password@hostname:port/database_name
 
-
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.sqlite3',
@@ -79,6 +78,8 @@ DATABASES = {
 
 
 # mysql://bf199d2688f63a:8296016b@eu-cdbr-west-02.cleardb.net/heroku_e3f89a5afdbe8e0?reconnect=true
+# username: bf199d2688f63a
+# password: 8296016b
 
 '''
 DATABASES = {

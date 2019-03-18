@@ -2,30 +2,27 @@
 
 ## CHAT PRIVATE
 
-- memorizzazione delle chat
-- memorizzazione degli utenti tramite registrazione semplice
-- lato client html, css, js (ajax)
-- lato server python
+- Django (Framework Python)
+- SQLite3 (Database)
+- Heroku (Web Hosting e altro)
+- Lato Client:
+  - HTML, CSS, JS
+  - Richieste AJAX
+
 
 ## CONFIGURAZIONE DATABASE
 
 	DATABASES = {
 		'default': {
-			'ENGINE': 'django.db.backends.mysql', 
-			'NAME': 'heroku_e3f89a5afdbe8e0',
-			'USER': 'bf199d2688f63a',
-			'PASSWORD': '8296016b',
-			'HOST': 'eu-cdbr-west-02.cleardb.net',
-			'PORT': '',
-			'OPTIONS': {
-				'ssl': {
-					'ca': 'certificates/cleardb-ca.pem',
-					'cert': 'certificates/bf199d2688f63a-cert.pem',
-					'key': 'certificates/bf199d2688f63a-key.pem'
-				}
-			}
+			'ENGINE': 'django.db.backends.sqlite3',
+			'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 		}
 	}
 
-- username: bf199d2688f63a
-- password: 8296016b
+
+## INSTALLAZIONE
+
+- pip install -r requirements.txt
+- python manage.py migrate
+- python manage.py makemigrations
+- python manage.py runserver
