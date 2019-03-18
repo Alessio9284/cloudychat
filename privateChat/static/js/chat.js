@@ -26,22 +26,34 @@ $(document).ready(function()
 		$.ajax(
 		{
 			type: "POST",
-			url: "../../update/" + nickname + "/",
+			url: "../../update/" + tu + "/",
+			data:
+			{
+				messages : $("#messaggi > div").length
+			},
 			success: function(data)
 			{
-				console.log(data);
-				var json = JSON.parse(data);
-				console.log(json);
+				//console.log(data);
 
-				$("#scritte").html("");
-
-				for(var i = 0; i < json.length; i++)
+				if(data != "nochange")
 				{
-					$("#scritte").append(
-						"<p>" + json[i].fields.text + "</p>" +
-						"<p style='font-size: 10px;'>" + json[i].fields.date +
-						"<span>&nbspby " + json[i].fields.io + "</span></p>"
-					);
+					var json = JSON.parse(data);
+					//console.log(json);
+
+					$("#messaggi").html("");
+
+					for(var i = 0; i < json.length; i++)
+					{
+						$("#messaggi").append(
+							"<div class='" + (json[i].fields.tu == tu ? 'destra' : 'sinistra') + "'>" +
+							"<p>" + json[i].fields.text + "</p>" +
+							"<p class='tempo'>" + json[i].fields.date +
+							"<span>&nbspby " + json[i].fields.io + "</span></p>" +
+							"</div>"
+						);
+					}
+
+					animazione();
 				}
 			},
 			error: function(a, b, error)
@@ -56,12 +68,22 @@ $(document).ready(function()
 
 $(document).on("click", "#invio", function()
 {
-	console.log("aggiunta del messaggio direttamente sulla pagina");
+	//console.log("aggiunta del messaggio direttamente sulla pagina");
 
 	var o = new Date();
 
 	var date =
 	o.getDate()+"/"+(o.getMonth()+1)+"/"+o.getFullYear()+" "+o.getHours()+":"+o.getMinutes()+":"+o.getSeconds();
+
+	$("#messaggi").append(
+		"<div class='destra'>" +
+		"<p>" + $("#messaggio").val() + "</p>" +
+		"<p class='tempo'>" + date +
+		"<span>&nbspby " + io + "</span></p>" +
+		"</div>"
+	);
+
+	animazione();
 
 	$.ajax(
 	{
@@ -71,11 +93,11 @@ $(document).on("click", "#invio", function()
 		{
 			message : $("#messaggio").val(),
 			date : date,
-			to : nickname
+			to : tu
 		},
 		success: function(data)
 		{
-			console.log(data);
+			//console.log(data);
 		},
 		error: function(a, b, error)
 		{
@@ -84,4 +106,19 @@ $(document).on("click", "#invio", function()
 	});
 
 	$("#messaggio").val("");
+});
+
+function animazione()
+{
+	$("#messaggi").animate({
+		scrollTop: $("#messaggi").prop('scrollHeight')
+	}, 500);
+}
+
+$(document).on("keypress", function(e)
+{
+    if(e.which == 13)
+    {
+        $("#invio").click();
+    }
 });

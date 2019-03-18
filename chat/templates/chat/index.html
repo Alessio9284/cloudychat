@@ -7,16 +7,16 @@
 		<div class="log_reg">
 			<form method="post" action="/log/">
 				<span class="titolo">
-					Welcome
+					<span>Welcome to</span> CloudyChat
 				</span>
 
 				<div class="inputs">
-					<input class="input" type="text" name="nickname">
+					<input class="input" type="text" name="nickname" oninput="place_holder(event, 0);" autocomplete="off">
 					<span class="placeholder" data-placeholder="Nickname"></span>
 				</div>
 
 				<div class="inputs">
-					<input class="input" type="password" name="password">
+					<input class="input" type="password" name="password" oninput="place_holder(event, 1);" autocomplete="off">
 					<span class="placeholder" data-placeholder="Password"></span>
 				</div>
 

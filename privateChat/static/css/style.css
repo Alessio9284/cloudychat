@@ -15,6 +15,17 @@ body, html
 	background-size: cover;
 }
 
+a
+{
+	text-decoration: none;
+	color: #0000EE;
+}
+
+a:active
+{
+	color: #0000EE;
+}
+
 a:focus
 {
 	outline: none !important;
@@ -48,6 +59,17 @@ button:hover
 	cursor: pointer;
 }
 
+.footer
+{
+    margin-top: 20px;
+}
+
+.footer > a
+{
+	font-size: 15px;
+	font-weight: bold;
+}
+
 .contenitore
 {
 	width: 100%;
@@ -70,13 +92,18 @@ button:hover
 	background: #fff;
 	border-radius: 20px;
 	overflow: hidden;
-	padding: 77px 55px 33px 55px;
+	padding: 60px 55px 33px 55px;
 
 	box-shadow: 0 5px 50px 0px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 0 5px 50px 0px rgba(0, 0, 0, 0.5);
 	-webkit-box-shadow: 0 5px 50px 0px rgba(0, 0, 0, 0.5);
 	-o-box-shadow: 0 5px 50px 0px rgba(0, 0, 0, 0.5);
 	-ms-box-shadow: 0 5px 50px 0px rgba(0, 0, 0, 0.5);
+}
+
+.titolo > span
+{
+	font-size: 25px;
 }
 
 .titolo
@@ -259,6 +286,6 @@ button:hover
 	.log_reg
 	{
 		min-width: 250px;
-    	padding: 77px 30px 33px 30px;
+    	padding: 60px 30px 33px 30px;
     }
 }

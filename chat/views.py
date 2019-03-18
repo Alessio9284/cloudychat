@@ -7,6 +7,9 @@ from django.core import serializers
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.db.models import Q
 
+# DEBUGGER
+import pdb;
+
 import random
 import json
 
@@ -45,7 +48,9 @@ def chat(request, nickname):
 
 	checkSession(request)
 
-	return render(request, 'chat/private_chat.html', { 'nickname' : nickname })
+	io = request.session['nickname']
+
+	return render(request, 'chat/private_chat.html', {'tu' : nickname, 'io' : io})
 
 
 def adduser(request):
@@ -131,16 +136,22 @@ def updatemessages(request, nickname):
 
 	checkSession(request)
 
-	io = request.session['nickname']
+	if int(request.POST['messages']) != Message.objects.all().count():
 
-	if io == nickname:
-		messages = serializers.serialize('json', Message.objects.filter(io = io, tu = nickname).order_by('id'))
-	else:
-		messages = serializers.serialize('json', 
-			Message.objects.filter(Q(io = io, tu = nickname) | Q(io = nickname, tu = io)).order_by('id')
-		)
+		io = request.session['nickname']
 
-	return JsonResponse(messages, safe = False)
+		if io == nickname:
+			messages = serializers.serialize('json',
+				Message.objects.filter(io = io, tu = nickname).order_by('id')
+			)
+		else:
+			messages = serializers.serialize('json', 
+				Message.objects.filter(Q(io = io, tu = nickname) | Q(io = nickname, tu = io)).order_by('id')
+			)
+
+		return JsonResponse(messages, safe = False)
+
+	return JsonResponse("nochange", safe = False)
 
 def addmessage(request):
 
@@ -159,7 +170,15 @@ def addmessage(request):
 		# INSERT nel database
 		message.save()
 
-	return JsonResponse({'response' : 1}, safe = False)
+	return JsonResponse("add", safe = False)
+
+def truncate(request):
+
+	# Eliminazione di tutti i record nei modelli
+	User.objects.all().delete()
+	Message.objects.all().delete()
+
+	return HttpResponseRedirect('../')
 
 # FUNCTIONS
 
