@@ -31,15 +31,15 @@ $(document).ready(function()
 			url: "../update/",
 			success: function(data)
 			{
-				//console.log(data);
+				console.log(data);
 				var json = JSON.parse(data);
-				//console.log(json);
+				console.log(json);
 
 				$("#users").html("");
 
 				for(var i = 0; i < json.length; i++)
 				{
-					nickname = json[i].fields.nickname;
+					nickname = json[i].pk;
 					color = json[i].fields.color;
 
 					$("#users").append(

@@ -46,9 +46,9 @@ def chat(request, nickname):
 
 	if User.objects.filter(nickname = nickname, active = True).exists():
 
-		io = request.session['nickname']
+		frm = request.session['nickname']
 
-		return render(request, 'chat/private_chat.html', {'tu' : nickname, 'io' : io})
+		return render(request, 'chat/private_chat.html', {'to' : nickname, 'frm' : frm})
 
 	return HttpResponseRedirect('../')
 
@@ -136,15 +136,15 @@ def updatemessages(request, nickname):
 
 	if int(request.POST['messages']) != Message.objects.all().count():
 
-		io = request.session['nickname']
+		frm = request.session['nickname']
 
-		if io == nickname:
+		if frm == nickname:
 			messages = serializers.serialize('json',
-				Message.objects.filter(io = io, tu = nickname).order_by('id')
+				Message.objects.filter(frm = frm, to = nickname).order_by('id')
 			)
 		else:
 			messages = serializers.serialize('json', 
-				Message.objects.filter(Q(io = io, tu = nickname) | Q(io = nickname, tu = io)).order_by('id')
+				Message.objects.filter(Q(frm = frm, to = nickname) | Q(frm = nickname, to = frm)).order_by('id')
 			)
 
 		return JsonResponse(messages, safe = False)
@@ -157,12 +157,15 @@ def addmessage(request):
 
 	if request.method == 'POST':
 
+		frm = request.session['nickname']
+		to = request.POST['to']
+
 		# Creazione del messaggio tramite un oggetto
 		message = Message(
 			text = request.POST['message'],
 			date = request.POST['date'],
-			io = request.session['nickname'],
-			tu = request.POST['to']
+			frm = User.objects.get(nickname = frm),
+			to = User.objects.get(nickname = to),
 		)
 
 		# INSERT nel database

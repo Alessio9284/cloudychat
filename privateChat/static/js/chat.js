@@ -26,29 +26,29 @@ $(document).ready(function()
 		$.ajax(
 		{
 			type: "POST",
-			url: "../../update/" + tu + "/",
+			url: "../../update/" + to + "/",
 			data:
 			{
 				messages : $("#messaggi > div").length
 			},
 			success: function(data)
 			{
-				//console.log(data);
+				console.log(data);
 
 				if(data != "nochange")
 				{
 					var json = JSON.parse(data);
-					//console.log(json);
+					console.log(json);
 
 					$("#messaggi").html("");
 
 					for(var i = 0; i < json.length; i++)
 					{
 						$("#messaggi").append(
-							"<div class='" + (json[i].fields.tu == tu ? 'destra' : 'sinistra') + "'>" +
+							"<div class='" + (json[i].fields.to == to ? 'destra' : 'sinistra') + "'>" +
 							"<p>" + json[i].fields.text + "</p>" +
 							"<p class='tempo'>" + json[i].fields.date +
-							"<span>&nbspby " + json[i].fields.io + "</span></p>" +
+							"<span>&nbspby " + json[i].fields.frm + "</span></p>" +
 							"</div>"
 						);
 					}
@@ -79,7 +79,7 @@ $(document).on("click", "#invio", function()
 		"<div class='destra'>" +
 		"<p>" + $("#messaggio").val() + "</p>" +
 		"<p class='tempo'>" + date +
-		"<span>&nbspby " + io + "</span></p>" +
+		"<span>&nbspby " + frm + "</span></p>" +
 		"</div>"
 	);
 
@@ -93,7 +93,7 @@ $(document).on("click", "#invio", function()
 		{
 			message : $("#messaggio").val(),
 			date : date,
-			to : tu
+			to : to
 		},
 		success: function(data)
 		{
