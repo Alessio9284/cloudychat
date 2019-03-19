@@ -11,46 +11,48 @@ import json
 
 def index(request):
 
-	if 'nickname' in request.session and 'password' in request.session and 'color' in request.session:
-		
+	if checkSession(request):
+
 		nickname = request.session['nickname']
-		password = request.session['password']
 
 		# Utente inattivo
-		User.objects.filter(nickname = nickname, password = password).update(active = False)
+		User.objects.filter(nickname = nickname).update(active = False)
 
-	# Distruzione della sessione
-	for k in list(request.session.keys()):
-		del request.session[k]
+		# Distruzione della sessione
+		del request.session['nickname']
 
 	return render(request, 'chat/index.html')
    
 def registration(request):
+
 	return render(request, 'chat/registration.html')
 
 def userlist(request):
 
-	checkSession(request)
+	if checkSession(request):
 
-	nickname = request.session['nickname']
-	password = request.session['password']
+		nickname = request.session['nickname']
 
-	# Utente attivo
-	User.objects.filter(nickname = nickname, password = password).update(active = True)
+		# Utente attivo
+		User.objects.filter(nickname = nickname).update(active = True)
 
-	return render(request, 'chat/userlist.html')
+		return render(request, 'chat/userlist.html')
+	else:
+		return HttpResponseRedirect('../')
 
 def chat(request, nickname):
 
-	checkSession(request)
+	if checkSession(request):
 
-	if User.objects.filter(nickname = nickname, active = True).exists():
+		if User.objects.filter(nickname = nickname, active = True).exists():
 
-		frm = request.session['nickname']
+			frm = request.session['nickname']
 
-		return render(request, 'chat/private_chat.html', {'to' : nickname, 'frm' : frm})
-
-	return HttpResponseRedirect('../')
+			return render(request, 'chat/private_chat.html', {'to' : nickname, 'frm' : frm} )
+		else:
+			return HttpResponseRedirect('../')
+	else:
+		return HttpResponseRedirect('../')
 
 def adduser(request):
 
@@ -80,12 +82,14 @@ def adduser(request):
 
 				# INSERT nel database
 				user.save()
-				
+
 				return HttpResponseRedirect('../')
-			
+			else:
+				return HttpResponseRedirect('/reg/')
+		else:
 			return HttpResponseRedirect('/reg/')
-	
-	return HttpResponseRedirect('/reg/')
+	else:
+		return HttpResponseRedirect('/reg/')
 
 def logging(request):
 
@@ -108,70 +112,78 @@ def logging(request):
 
 			if (user.exists()):
 
-				# Estrazione del colore dall'utente salvato
-				color = User.objects.get(nickname = nickname, password = password).color
-
 				request.session['nickname'] = nickname
-				request.session['password'] = password
-				request.session['color'] = color
 
 				return HttpResponseRedirect('/list/')
-
+			else:
+				return HttpResponseRedirect('../')
+		else:
 			return HttpResponseRedirect('../')
-
-	return HttpResponseRedirect('../')
+	else:
+		return HttpResponseRedirect('../')
 
 def updatelist(request):
 
-	checkSession(request)
+	if checkSession(request):
 
-	userlist = serializers.serialize('json', User.objects.filter(active = True))
+		userlist = serializers.serialize('json', User.objects.filter(active = True))
 
-	return JsonResponse(userlist, safe = False)
-
+		return JsonResponse(userlist, safe = False)
+	else:
+		return HttpResponseRedirect('../')
 
 def updatemessages(request, nickname):
 
-	checkSession(request)
+	if checkSession(request):
 
-	if int(request.POST['messages']) != Message.objects.all().count():
+		active = User.objects.get(nickname = nickname).active
 
-		frm = request.session['nickname']
+		if int(request.POST['messages']) != Message.objects.all().count():
 
-		if frm == nickname:
-			messages = serializers.serialize('json',
-				Message.objects.filter(frm = frm, to = nickname).order_by('id')
-			)
+			frm = request.session['nickname']
+
+			if frm == nickname:
+				messages = serializers.serialize('json',
+					Message.objects.filter(frm = frm, to = nickname).order_by('id')
+				)
+			else:
+				messages = serializers.serialize('json', 
+					Message.objects.filter(
+						Q(frm = frm, to = nickname) | Q(frm = nickname, to = frm)
+					).order_by('id')
+				)
+
+			return JsonResponse({'data' : json.loads(messages), 'active' : active}, safe = False)
 		else:
-			messages = serializers.serialize('json', 
-				Message.objects.filter(Q(frm = frm, to = nickname) | Q(frm = nickname, to = frm)).order_by('id')
-			)
-
-		return JsonResponse(messages, safe = False)
-
-	return JsonResponse("nochange", safe = False)
+			return JsonResponse({'data' : 'nochange', 'active' : active}, safe = False)
+	else:
+		return HttpResponseRedirect('../../')
 
 def addmessage(request):
 
-	checkSession(request)
+	if checkSession(request):
 
-	if request.method == 'POST':
+		if request.method == 'POST':
 
-		frm = request.session['nickname']
-		to = request.POST['to']
+			frm = request.session['nickname']
+			to = request.POST['to']
 
-		# Creazione del messaggio tramite un oggetto
-		message = Message(
-			text = request.POST['message'],
-			date = request.POST['date'],
-			frm = User.objects.get(nickname = frm),
-			to = User.objects.get(nickname = to),
-		)
+			# Creazione del messaggio tramite un oggetto
+			message = Message(
+				text = request.POST['message'],
+				date = request.POST['date'],
+				frm = User.objects.get(nickname = frm),
+				to = User.objects.get(nickname = to),
+			)
 
-		# INSERT nel database
-		message.save()
+			# INSERT nel database
+			message.save()
 
-	return JsonResponse("add", safe = False)
+			return JsonResponse("add", safe = False)
+		else:
+			return HttpResponseRedirect('../')
+	else:
+		return HttpResponseRedirect('../')
 
 def truncate(request):
 
@@ -179,11 +191,13 @@ def truncate(request):
 	User.objects.all().delete()
 	Message.objects.all().delete()
 
-	return HttpResponseRedirect('../')
+	return HttpResponseRedirect('../../')
 
 # FUNCTIONS
 
-def checkSession(r):
-	if 'nickname' not in r.session or 'password' not in r.session or 'color' not in r.session:
+def checkSession(request):
+	if 'nickname' in request.session:
 
-		return HttpResponseRedirect('../')
+		return True
+	else:
+		return False

@@ -31,24 +31,23 @@ $(document).ready(function()
 			{
 				messages : $("#messaggi > div").length
 			},
-			success: function(data)
+			success: function(json)
 			{
-				console.log(data);
+				console.log(json);
 
-				if(data != "nochange")
+				$("#connesso").css("color", (json.active ? "lime" : "red"));
+
+				if(json.data != "nochange")
 				{
-					var json = JSON.parse(data);
-					console.log(json);
-
 					$("#messaggi").html("");
 
-					for(var i = 0; i < json.length; i++)
+					for(var i = 0; i < json.data.length; i++)
 					{
 						$("#messaggi").append(
-							"<div class='" + (json[i].fields.to == to ? 'destra' : 'sinistra') + "'>" +
-							"<p>" + json[i].fields.text + "</p>" +
-							"<p class='tempo'>" + json[i].fields.date +
-							"<span>&nbspby " + json[i].fields.frm + "</span></p>" +
+							"<div class='" + (json.data[i].fields.to == to ? 'destra' : 'sinistra') + "'>" +
+							"<p>" + json.data[i].fields.text + "</p>" +
+							"<p class='tempo'>" + json.data[i].fields.date +
+							"<span>&nbspby " + json.data[i].fields.frm + "</span></p>" +
 							"</div>"
 						);
 					}
